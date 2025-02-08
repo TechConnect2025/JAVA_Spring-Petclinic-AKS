@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: customers-service
+  config:
+    import: optional:configserver:${CONFIG_SERVER_URL:http://localhost:8888/}
+  datasource:
+    url: jdbc:mysql://mysql.mysql.svc.cluster.local:3306/petclinic?useSSL=false&allowPublicKeyRetrieval=true
+    username: ${MYSQL_USER}
+    password: ${MYSQL_PASSWORD}
+  sql:
+    init:
+      schema-locations: classpath*:db/mysql/schema.sql
+      data-locations: classpath*:db/mysql/data.sql
+      init: ALWAYS
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://discovery-server:80/eureka/
